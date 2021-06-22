@@ -10,6 +10,11 @@ inst(q2,1,qf,0,detener).
 
 % Simulador
 
+main :-
+	getLines(L),
+	turing(L,C),
+	write(C).
+
 turing(CintaActual, CintaFinal) :-
     ejecute(q0, [], CintaActual, Ls, Rs),
     reverse(Ls, Ls1),
@@ -31,3 +36,18 @@ accion(der, Ls0, [Sym|Rs], [Sym|Ls0], Rs).
  
 izq([], Rs0, [], [v|Rs0]).
 izq([L|Ls], Rs, Ls, [L|Rs]).
+
+
+% https://stackoverflow.com/questions/26826470/reading-lines-into-lists-with-prolog/26826824
+
+getLines(L):-
+  setup_call_cleanup(
+    open('cintaInicial.txt', read, In),
+    readData(In, L),
+    close(In)
+  ).
+
+readData(In, L):-
+  read_term(In, H, []),
+  (   L=H
+  ).
