@@ -10,9 +10,12 @@ inst(q2,1,qf,0,detener).
 
 % Simulador
 
+  
+
 main :-
 	getLines(L),
 	turing(L,C),
+	writeResult(C),
 	write(C).
 
 turing(CintaActual, CintaFinal) :-
@@ -51,3 +54,16 @@ readData(In, L):-
   read_term(In, H, []),
   (   L=H
   ).
+  
+% https://stackoverflow.com/questions/4736384/writing-in-file-swi-prolog-windows
+  
+writeResult(C):-
+   open('cintaFinal.txt',write,OS),
+   (   
+        
+   write(OS,C),nl(OS),
+   false
+   ;
+   close(OS)
+   ).
+  
