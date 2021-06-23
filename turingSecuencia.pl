@@ -2,6 +2,8 @@
 %inst(q0, 1, q0, 0, der).
 %inst(q0, v, qf, 1, detener).
 
+% https://machinedeturing.com/ang_exemple.php?page=9
+
 % b
 inst(a0,b,a1,0,der).
 inst(a1,b,a2,0,der).
