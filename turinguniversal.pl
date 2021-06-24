@@ -1,4 +1,4 @@
-%! Programa de la máquina de Turing
+%! Programa de la mÃ¡quina de Turing
 %inst(q0, 1, q0, 0, der).
 %inst(q0, v, qf, 1, detener).
 
@@ -13,10 +13,11 @@ main :-
 	getLines(L),
 	turing(L,C),
 	writeResult(C),
-	turing(busy_beaver_config, busy_beaver, C, TapeOut),
+	turing(busy_beaver_config, busy_beaver, [0,1,1,1], TapeOut),
 	write(C),
 	write('\nUTM: '),
 	write(TapeOut).
+
 
 
 turing(CintaActual, CintaFinal) :-
@@ -40,7 +41,11 @@ accion(der, Ls0, [Sym|Rs], [Sym|Ls0], Rs).
 
 izq([], Rs0, [], [v|Rs0]).
 izq([L|Ls], Rs, Ls, [L|Rs]).
+
 % ------------------------------------------------------------------------
+%
+symbol([],       B,   [], B).
+symbol([Sym|Rs], Sym, Rs, _).
 
 action(left,  {Lin, Rin},  {Lout, Rout}, B) :- left(Lin, Rin, Lout, Rout, B).
 action(stay,  Tape,        Tape,         _).
@@ -92,13 +97,12 @@ perform(Config, Rules, State, TapeIn, TapeOut) :-
         TapeOut = TapeIn
     ; memberchk(State, RS) ->
         {LeftIn, RightIn} = TapeIn,
-        simbolo(RightIn, Symbol, RightRem),
+        symbol(RightIn, Symbol, RightRem, B),
         memberchk(Symbol, Symbols),
         once(call(Rules, State, Symbol, NewSymbol, Action, NewState)),
         memberchk(NewSymbol, Symbols),
         action(Action, {LeftIn, [NewSymbol|RightRem]}, {LeftOut, RightOut}, B),
         perform(Config, Rules, NewState, {LeftOut, RightOut}, TapeOut) ).
-
 
 busy_beaver_config(IS, FS, RS, B, S) :-
     IS = 'A',               % initial state
@@ -112,5 +116,3 @@ busy_beaver('B', 0, 1, left,  'A').
 busy_beaver('B', 1, 1, right, 'B').
 busy_beaver('C', 0, 1, left,  'B').
 busy_beaver('C', 1, 1, stay,  'HALT').
-
-%turing(busy_beaver_config, busy_beaver, [], TapeOut).
