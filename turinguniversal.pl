@@ -58,7 +58,7 @@ right(L, [S|Rs], [S|L], Rs, _).
 
 getLines(L):-
   setup_call_cleanup(
-    open('C:/Users/luisv/Downloads/Proyecto3Lenguajes-main/cintaInicial.txt', read, In),
+    open('cintaInicial.txt', read, In),
     readData(In, L),
     close(In)
   ).
@@ -71,7 +71,7 @@ readData(In, L):-
 % https://stackoverflow.com/questions/4736384/writing-in-file-swi-prolog-windows
 
 writeResult(C):-
-   open('C:/Users/luisv/Downloads/Proyecto3Lenguajes-main/cintaFinal.txt',write,OS),
+   open('cintaFinal.txt',write,OS),
    (
 
    write(OS,C),nl(OS),
