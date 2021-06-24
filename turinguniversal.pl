@@ -13,7 +13,7 @@ main :-
 	getLines(L),
 	turing(L,C),
 	writeResult(C),
-	turing(busy_beaver_config, busy_beaver, [0,1,1,1], TapeOut),
+	turing(busy_beaver_config, busy_beaver, C, TapeOut),
 	write(C),
 	write('\nUTM: '),
 	write(TapeOut).
