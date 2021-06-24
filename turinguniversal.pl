@@ -1,7 +1,12 @@
 %! Programa de la mÃ¡quina de Turing
 %inst(q0, 1, q0, 0, der).
 %inst(q0, v, qf, 1, detener).
-
+/**
+ *Primero, se desplaza la cinta que contiene las instrucciones, hasta encontrar las que coincidan con las del registro de configuración.
+ *Luego, ocurre el desplazamiento (izquierda o derecha) y el cambio de estado que corresponda, lo cual genera una nueva pareja de estado actual
+ *Este ciclo ocurre por un número de iteraciones, de manera que imiten las operaciones de la máquina de Turing original 
+ *y finalmente el resultado de ambas sería el mismo.
+ */
 inst(q0,0,q0,0,der).
 inst(q0,1,q1,1,der).
 inst(q1,1,q1,1,der).
